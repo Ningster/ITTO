@@ -149,6 +149,7 @@ module.exports = (env, options) => {
             }
         },
         devServer: {
+            historyApiFallback: true,            
             stats: {
                 all: false,
                 // chunks: true,
