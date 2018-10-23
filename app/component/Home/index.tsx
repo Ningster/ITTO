@@ -5,8 +5,8 @@ class Home extends React.Component {
     public render() {
         return (
             <div style={{display:'flex', justifyContent: 'center', marginTop:'30%'}}>
-                <Typography variant='headline'>
-                    You Won't Know Until You VOTE!
+                <Typography variant='h5'>
+                    You Never Know Until You VOTE!
                 </Typography>
             </div>
         );
