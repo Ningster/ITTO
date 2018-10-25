@@ -5,17 +5,11 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import AssignmentInd from '@material-ui/icons/AssignmentInd';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Link } from 'react-router-dom';
-import UserSignin from '@/component/UserSignin';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
 import theme from '../theme';
 import TextField from '@material-ui/core/TextField';
-import LineLogInBase from '@/assets/btn_login_base.png';
-import LineLogInHover from '@/assets/btn_login_hover.png';
-import LineLogInPress from '@/assets/btn_login_press.png';
+import { LoginLodable } from '@/component/Login';
 
 const styles = {
     logo : {
@@ -23,31 +17,11 @@ const styles = {
         textDecoration: 'none',
         color:'white',
     },
-    // signin : {
-    //     textDecoration: 'none',
-    //     color:'white',
-    // },
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    signInDialog : {
-        display: 'flex',
-        width: '40%',
-        backgroundColor: theme.palette.primary.main,
-        padding: '50px',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        borderRadius: '10px',
-    }
 };
 
 class TopAppBar extends React.Component {
     public state = {
         open: false,
-        lineBtn: LineLogInBase,
     };
 
     public handleOpen = () => {
@@ -62,28 +36,10 @@ class TopAppBar extends React.Component {
         });
     }
 
-    public handleMouseOver = () => {
-        this.setState({
-            lineBtn: LineLogInHover,
-        });
-    }
-
-    public handleMouseLeave = () => {
-        this.setState({
-            lineBtn: LineLogInBase,
-        });
-    }
-
-    public handleMouseDown = () => {
-        this.setState({
-            lineBtn: LineLogInPress,
-        });
-    }
-
     public render() {
 
         return (
-            <AppBar>
+            <AppBar position='static' style={{position: 'relative'}}>
                 <Toolbar>
                     <IconButton color='inherit' aria-label='Menu' style={{marginRight: '20px'}}>
                         <MenuIcon />
@@ -96,30 +52,7 @@ class TopAppBar extends React.Component {
                     <IconButton color='inherit' aria-label='Login' onClick={this.handleOpen}>
                         <AccountCircle />
                     </IconButton>
-                    <Modal
-                        open={this.state.open}
-                        onClose={this.handleClose}
-                        style={styles.modal}
-                        disableAutoFocus={true}
-                    >
-                        <div style={styles.signInDialog}>
-                            <AssignmentInd style={{color: theme.palette.primary.contrastText,marginRight:'10px',width:'50px'}}/>
-                            <Typography variant='h6' id='modal-title' color='textSecondary' style={{marginBottom: '50px'}}>
-                                Connect with
-                            </Typography>
-                            <div
-                                onMouseEnter={this.handleMouseOver}
-                                onMouseLeave={this.handleMouseLeave}
-                                onMouseDown={this.handleMouseDown}
-                                style={{cursor:'pointer'}}
-                            >
-                                <img
-                                    src={this.state.lineBtn}
-                                    alt='LINE Log In'
-                                />
-                            </div>
-                        </div>
-                    </Modal>
+                    <LoginLodable handleClose={this.handleClose} open={this.state.open} />
                 </Toolbar>
             </AppBar>
         );
